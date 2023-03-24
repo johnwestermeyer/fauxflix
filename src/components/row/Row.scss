@@ -1,0 +1,30 @@
+@use '/src/base';
+
+.row{
+    width: 100%;
+    display: flex;
+    padding-top: 10px;
+    overflow: hidden;
+}
+.hoverContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.hoverNav{
+    position: absolute;
+    width: 5%;
+    background-color: transparent;
+}
+.hoverNav:hover {
+    background-color: base.$secondary-color;
+}
+
+.hoverNav.Forward{
+    float: right;
+}
+
+.hoverNav.Backward{
+    float: left;
+}
