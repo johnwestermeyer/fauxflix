@@ -14,17 +14,19 @@
 }
 .hoverNav{
     position: absolute;
-    width: 5%;
     background-color: transparent;
+    height: 20%;
 }
 .hoverNav:hover {
-    background-color: base.$secondary-color;
+    background-color: rgb(0, 0, 0, 0.7);
 }
 
 .hoverNav.Forward{
     float: right;
+    right: 2%;
 }
 
 .hoverNav.Backward{
     float: left;
+    left: 2%;
 }

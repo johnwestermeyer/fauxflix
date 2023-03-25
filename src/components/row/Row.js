@@ -36,13 +36,13 @@ const Row = () => {
     return (
         <div className="row">
             <div className="hoverContainer">
-                <div className="hoverNav Backward">test</div>
+                <div className="hoverNav Backward">&#60;</div>
             </div>
             {listContent.map((title, i)=> (
                 <BoxArt key={i} title={title.title} image={title.poster_path} overview={title.overview}/>
             ))}
             <div className="hoverContainer">
-                <div className="hoverNav Forward">test</div>
+                <div className="hoverNav Forward"></div>
             </div>
         </div>
     )
