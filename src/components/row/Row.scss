@@ -16,7 +16,7 @@
 .hoverNav{
     position: absolute;
     background-color: transparent;
-    padding: 2%;
+    padding: 1%;
     border: none;
     border-radius: 5%;
     z-index: 2;
@@ -31,12 +31,12 @@
 
 .hoverNav.Forward{
     float: right;
-    right: 1%;
+    right: 0;
 }
 
 .hoverNav.Backward{
     float: left;
-    left: 1%;
+    left: 0;
 }
 
 .hoverIcon {

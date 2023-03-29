@@ -38,8 +38,8 @@ const Homepage = () => {
 
     return (
         <>
-            <Row rowLength={rowLength}/>
-            <Row rowLength={rowLength}/>
+            <Row rowLength={rowLength} genre={"35"} name={"Comedy"}/>
+            <Row rowLength={rowLength} genre={"16"} name={"Animation"}/>
         </>
     )
 };
