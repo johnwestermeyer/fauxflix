@@ -1,14 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import "./Row.scss"
+import sample from '../../assets/sample.json';
+import videosample from '../../assets/videosample.json';
 import BoxArt from '../BoxArt/BoxArt';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 
-const Row = ({rowLength, genre}) => {
+const Row = ({rowLength, genre, setShowPreview}) => {
     const discoverURL = "https://api.themoviedb.org/3/discover/movie?api_key="+process.env.REACT_APP_TMDB_API_KEY+
     "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_genres="+genre+"&with_watch_monetization_types=flatrate";
-    const [input, setInput] = useState(null);
+    const videoinput = videosample.results;
+    const [input, setInput] = useState([]);
+    const [trailersAdded, setTrailersAdded] = useState(false);
+    const [videoInput, setVideoInput] = useState([]);
     const [listStart, setListStart] = useState(0);
     const [listContent, setListContent] = useState(null);
     const [shallowList, setShallowList] = useState([]);
@@ -16,15 +21,29 @@ const Row = ({rowLength, genre}) => {
     const discoverFetch = async () => {
         const r = await fetch(discoverURL);
         const results = await r.json();
-        setInput(results.results);
+        results.results.forEach((result) => {
+            videoFetch(result)
+        });
+    };
+
+    const videoFetch = async (result) => {
+        const url = "https://api.themoviedb.org/3/movie/"+result.id+"/videos?api_key="+process.env.REACT_APP_TMDB_API_KEY+"&language=en-US"
+        const vr = await fetch(url);
+        const results = await vr.json();
+        const trailer = results.results.find(v => v.type === "Trailer");
+        const newInput = result;
+        if(trailer === undefined) {
+            newInput.trailer = null;
+        } else {
+            newInput.trailer = trailer.key;
+        }
+        setInput(input => [...input, newInput]);
     };
 
     useEffect(() =>{
-        if(input === null){
-            discoverFetch();
-        };
+        discoverFetch();
     },[]);
-    
+
     useEffect(() => {
         if(input !== null){
             if(input.length > rowLength){
@@ -43,12 +62,10 @@ const Row = ({rowLength, genre}) => {
         setShallowList(listContent);
         if(listStart - rowLength > 0){
             setListStart(listStart - rowLength);
-        } else if (listStart - rowLength === 0){
-            setListStart(0);
         } else {
-            setListStart(input.length - rowLength);
+            setListStart(0);
         }
-    }
+    };
 
     const scrollListForward = () => {
         setShallowList(listContent);
@@ -59,21 +76,21 @@ const Row = ({rowLength, genre}) => {
         } else {
             setListStart(input.length - listStart);
         }
-    }
+    };
 
 
     if(listContent === null){
         return (<>Loading....</>)
-    } else {
-        return (
+    }
+    return (
         <div className="row">
             <div className="hoverContainer">
-                {<button onClick={scrollListBackward} className="hoverNav Backward">
+                {listStart !== 0 && <button onClick={scrollListBackward} className="hoverNav Backward">
                     <FontAwesomeIcon className="hoverIcon" icon={faChevronLeft}/>
                 </button>}
             </div>
             {listContent.map((title, i)=> (
-                <BoxArt key={i} title={title.title} image={title.poster_path} overview={title.overview} id={title.id}/>
+                <BoxArt key={i} title={title.title} image={title.poster_path} setShowPreview={setShowPreview} id={title.id} trailer={title.trailer} overview={title.overview}/>
             ))}
             <div className="hoverContainer">
                 <button onClick={scrollListForward} className="hoverNav Forward">
@@ -81,8 +98,7 @@ const Row = ({rowLength, genre}) => {
                 </button>
             </div>
         </div>
-        )
-    }
+    )
 };
 
 export default Row;

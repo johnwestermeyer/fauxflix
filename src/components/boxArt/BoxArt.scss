@@ -1,6 +1,6 @@
 @use '/src/base';
 
-button {
+.boxArtContainer {
     background-color: transparent;
     border-width: 0;
     font-family: inherit;
@@ -12,18 +12,16 @@ button {
 }
 
 .boxArt{
+    display: block;
     min-width: 80px;
     position: relative;
     height: 100%;
     transition: all .2s ease-in-out;
 }
 
-.boxArt:hover{
-    transform: scale(2);
-    max-width: 160px;
-    max-height: 40%;
-    position: absolute;
-    z-index: 3
+.boxArt:focus ~ .boxArt,
+.boxArt:hover ~ .boxArt {
+  transform: translateX(25%);
 }
 
 .posterImage{

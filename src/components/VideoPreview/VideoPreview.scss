@@ -1,0 +1,10 @@
+@use '/src/base';
+
+.videoPreview{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10%;
+    align-items: center;
+    z-index: 10;
+}

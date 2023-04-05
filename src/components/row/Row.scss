@@ -5,8 +5,23 @@
     max-height: 20%;
     display: flex;
     padding-top: 10px;
-    overflow: hidden;
+    box-sizing: border-box;
+    padding-left:4%;
+    padding-right:4%
 }
+
+.row:focus-within .item,
+.row:hover .item {
+  transform: translateX(-25%);
+}
+
+.row .boxArt:focus,
+.row .boxArt:hover {
+  transform: scale(1.75);
+  z-index: 3;
+}
+
+
 .hoverContainer{
     display: flex;
     justify-content: center;
@@ -31,12 +46,12 @@
 
 .hoverNav.Forward{
     float: right;
-    right: 0;
+    right: 1%;
 }
 
 .hoverNav.Backward{
     float: left;
-    left: 0;
+    left: 1%;
 }
 
 .hoverIcon {

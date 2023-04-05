@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Row from '../../components/Row/Row'
+import VideoPreview from "../../components/VideoPreview/VideoPreview";
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
@@ -28,18 +29,23 @@ function useWindowDimensions() {
 
 const Homepage = () => {    
     const {height, width} = useWindowDimensions();    
-    const [rowLength, setRowLength] = useState(9);
+    const [rowLength, setRowLength] = useState(8);
+    const [showPreview, setShowPreview] = useState(false);
 
     useEffect(() => {
-        const returnValue = Math.round((width * 0.85) / 80);
-        if(returnValue <= 9)
-        setRowLength(returnValue);
+        const returnValue = Math.round((width * 0.80) / 80);
+        if(returnValue <= 8){          
+          setRowLength(returnValue);
+        }
     },[width])
 
     return (
         <>
-            <Row rowLength={rowLength} genre={"35"} name={"Comedy"}/>
-            <Row rowLength={rowLength} genre={"16"} name={"Animation"}/>
+        <p style={{color: "white"}}>PlaceHolder</p>
+            
+            <VideoPreview title={showPreview.title} trailer={showPreview.trailer} overview={showPreview.overview} setShowPreview={setShowPreview} showPreview={showPreview}/>
+            <Row rowLength={rowLength} genre={"35"} name={"Comedy"} setShowPreview={setShowPreview}/>
+            <Row rowLength={rowLength} genre={"16"} name={"Animation"} setShowPreview={setShowPreview}/>
         </>
     )
 };
