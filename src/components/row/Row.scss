@@ -5,9 +5,15 @@
     max-height: 20%;
     display: flex;
     padding-top: 10px;
+    padding-bottom: 10px;
     box-sizing: border-box;
     padding-left:4%;
     padding-right:4%
+}
+
+.heading{
+    padding-left: 4%;
+    color: #FFFFFF;
 }
 
 .row:focus-within .item,

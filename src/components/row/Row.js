@@ -1,19 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import "./Row.scss"
-import sample from '../../assets/sample.json';
-import videosample from '../../assets/videosample.json';
 import BoxArt from '../BoxArt/BoxArt';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 
-const Row = ({rowLength, genre, setShowPreview}) => {
+const Row = ({rowLength, genre, name, setShowPreview, retrieveGenre}) => {
     const discoverURL = "https://api.themoviedb.org/3/discover/movie?api_key="+process.env.REACT_APP_TMDB_API_KEY+
     "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_genres="+genre+"&with_watch_monetization_types=flatrate";
-    const videoinput = videosample.results;
     const [input, setInput] = useState([]);
-    const [trailersAdded, setTrailersAdded] = useState(false);
-    const [videoInput, setVideoInput] = useState([]);
     const [listStart, setListStart] = useState(0);
     const [listContent, setListContent] = useState(null);
     const [shallowList, setShallowList] = useState([]);
@@ -32,10 +27,13 @@ const Row = ({rowLength, genre, setShowPreview}) => {
         const results = await vr.json();
         const trailer = results.results.find(v => v.type === "Trailer");
         const newInput = result;
+        const genreNames = retrieveGenre(result.genre_ids);
         if(trailer === undefined) {
             newInput.trailer = null;
+            newInput.genreNames = genreNames;
         } else {
             newInput.trailer = trailer.key;
+            newInput.genreNames = genreNames;
         }
         setInput(input => [...input, newInput]);
     };
@@ -83,6 +81,8 @@ const Row = ({rowLength, genre, setShowPreview}) => {
         return (<>Loading....</>)
     }
     return (
+        <>
+        <span className="heading">{name}</span>
         <div className="row">
             <div className="hoverContainer">
                 {listStart !== 0 && <button onClick={scrollListBackward} className="hoverNav Backward">
@@ -90,7 +90,7 @@ const Row = ({rowLength, genre, setShowPreview}) => {
                 </button>}
             </div>
             {listContent.map((title, i)=> (
-                <BoxArt key={i} title={title.title} image={title.poster_path} setShowPreview={setShowPreview} id={title.id} trailer={title.trailer} overview={title.overview}/>
+                <BoxArt key={i} title={title} image={title.poster_path} setShowPreview={setShowPreview} id={title.id} trailer={title.trailer} overview={title.overview}/>
             ))}
             <div className="hoverContainer">
                 <button onClick={scrollListForward} className="hoverNav Forward">
@@ -98,6 +98,7 @@ const Row = ({rowLength, genre, setShowPreview}) => {
                 </button>
             </div>
         </div>
+        </>
     )
 };
 
