@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 
-const Row = ({rowLength, genre, name, setShowPreview, retrieveGenre}) => {
+const Row = ({rowLength, genre, name, setShowPreview, retrieveGenre, showPreview}) => {
     const discoverURL = "https://api.themoviedb.org/3/discover/movie?api_key="+process.env.REACT_APP_TMDB_API_KEY+
     "&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_genres="+genre+"&with_watch_monetization_types=flatrate";
     const [input, setInput] = useState([]);
@@ -90,7 +90,7 @@ const Row = ({rowLength, genre, name, setShowPreview, retrieveGenre}) => {
                 </button>}
             </div>
             {listContent.map((title, i)=> (
-                <BoxArt key={i} title={title} image={title.poster_path} setShowPreview={setShowPreview} id={title.id} trailer={title.trailer} overview={title.overview}/>
+                <BoxArt key={i} title={title} image={title.poster_path} setShowPreview={setShowPreview} id={title.id} trailer={title.trailer} overview={title.overview} showPreview={showPreview}/>
             ))}
             <div className="hoverContainer">
                 <button onClick={scrollListForward} className="hoverNav Forward">

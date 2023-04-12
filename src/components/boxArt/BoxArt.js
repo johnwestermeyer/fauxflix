@@ -3,13 +3,13 @@ import './BoxArt.scss';
 import Icon from "../../assets/icon";
 
 
-const BoxArt = ({iconStatus, setShowPreview, title}) => {
+const BoxArt = ({iconStatus, setShowPreview, title, showPreview}) => {
     return (
         <button
             className="boxArtContainer"
             onClick={()=>setShowPreview(title)}
             >
-            <div className="boxArt"> 
+            <div className={showPreview === false ? "boxArt" : "noHoverBoxArt"}> 
             <>
             {}
                 <div className="iconOverlay">

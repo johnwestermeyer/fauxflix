@@ -4,8 +4,6 @@ function Logo({color}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="45.957"
-      height="14.481"
       version="1.1"
       viewBox="0 0 12.16 3.831"
     >
@@ -86,7 +84,7 @@ function Logo({color}) {
         ></ellipse>
         <g
           fillOpacity="1"
-          stroke="#fff"
+          stroke="none"
           strokeDasharray="none"
           strokeMiterlimit="4"
           strokeOpacity="1"

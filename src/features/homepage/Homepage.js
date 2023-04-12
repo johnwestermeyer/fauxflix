@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Row from '../../components/Row/Row'
 import VideoPreview from "../../components/VideoPreview/VideoPreview";
+import Logo from '../../assets/logo';
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
@@ -68,17 +69,14 @@ const Homepage = () => {
     }
     return (
         <>
-        <p style={{color: "white"}}>PlaceHolder</p>
+        <div style={{paddingLeft: "4%", paddingTop: "2%", width: width/9}}><Logo color={"red"}/></div>
             <VideoPreview 
-              title={showPreview.title} 
-              trailer={showPreview.trailer} 
-              overview={showPreview.overview} 
               setShowPreview={setShowPreview} 
               showPreview={showPreview}
               height={height} 
               width={width}/>
             {genreList.map((genre, i) => 
-              <Row key={i} rowLength={rowLength} genre={genre.id} name={genre.name} setShowPreview={setShowPreview} retrieveGenre={retrieveGenre}/>)}
+              <Row key={i} rowLength={rowLength} genre={genre.id} name={genre.name} setShowPreview={setShowPreview} retrieveGenre={retrieveGenre} showPreview={showPreview}/>)}
         </>
     )
 };
