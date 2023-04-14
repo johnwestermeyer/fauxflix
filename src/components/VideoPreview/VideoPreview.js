@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import './VideoPreview.scss';
 import StyledRating from '../StyledRating/StyledRating';
 
-const VideoPreview = ({showPreview, setShowPreview, width}) => {
+const VideoPreview = ({showPreview, setShowPreview, width, height}) => {
     const {title, overview, trailer, vote_average, release_date, genreNames} = showPreview;
     return (
         <Modal
@@ -14,7 +14,9 @@ const VideoPreview = ({showPreview, setShowPreview, width}) => {
             overlayClassName="overlay"
             ariaHideApp={false}
             >
-            <div className="videoPreview" style={{width: Math.max((width * 0.60) + 20, 290)}}>
+            <div className="videoPreview" style={{width: Math.max((width * 0.60), 280)}}>
+                
+            <div className="title" style={{position: "relative", top:Math.max(((width * 0.60)/ 1.778) * .667, 110)}}>{title}</div>
                 {trailer !== null ? <ReactPlayer 
                     url={`https://www.youtube.com/watch?v=${trailer}`}
                     playing={true}
@@ -29,8 +31,9 @@ const VideoPreview = ({showPreview, setShowPreview, width}) => {
                     }}
                 /> :
                 <div style={{width:Math.max(width * 0.60, 280),
-                height:Math.max((width * 0.60) / 1.778, 157)}}/>}                
-                <span className="title" style={{position: "relative", bottom:((width * 0.60) / 1.778)/3}}>{title}</span>
+                height:Math.max((width * 0.60) / 1.778, 157), textAlign: "center"}}>
+                    No Trailer Found
+                    </div>}                
                 <div className="overview">
                     <div className="summary">
                         <div className="description">

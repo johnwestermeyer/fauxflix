@@ -69,7 +69,7 @@ const Homepage = () => {
     }
     return (
         <>
-        <div style={{paddingLeft: "4%", paddingTop: "2%", width: width/9}}><Logo color={"red"}/></div>
+        <div style={{paddingLeft: "4%", paddingTop: "2%", width: height/9}}><Logo color={"red"}/></div>
             <VideoPreview 
               setShowPreview={setShowPreview} 
               showPreview={showPreview}

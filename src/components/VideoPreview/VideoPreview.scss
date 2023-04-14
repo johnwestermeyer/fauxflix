@@ -1,23 +1,18 @@
 @use '/src/base';
 
 .videoPreview{
-    display: flex;
     box-sizing: border-box;
     flex-direction: column;
     vertical-align: center;
     align-items: center;
     margin: auto;
-    margin-top: 50px;
     height: 100%;
     color: #FFFFFF;
     border-radius: 5px;
     background-color: base.$secondary-color;
 }
-
 .overlay{    
     position: fixed;
-    width: 100%;
-    height: 100%;
     display:flex;
     background: rgba(0, 0, 0, 0.7);
     top: 0;
@@ -33,20 +28,20 @@
 
 .title{
     font-size: clamp(16px, 4vw, 40px);
-    position: fixed;
     align-self: flex-start;
     font-weight: 500;
     padding-left: 20px;
     padding-right: 5px;
     z-index: 2;
+    height: 0px;
     -webkit-text-stroke: clamp(1px, 0.3vw, 2px) black;
-    white-space: nowrap;
+    background: linear-gradient(down, transparent, base.$secondary-color);
 }
 .overview{
     display: flex;
     flex-direction: row;
     gap: 10px;
-    padding: 10px
+    padding: 10px;
 }
 .summary{ 
     display: flex;
